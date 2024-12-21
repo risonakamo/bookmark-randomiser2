@@ -1,0 +1,9 @@
+{
+    "name":"Bookmark Randomiser 2",
+    "short_name":"bm_random2",
+    "description":"Randomise Bookmarks",
+    "version":"2.0.0",
+    "homepage_url":"todo",
+    "manifest_version":3,
+    "author":"risonakamo"
+}
