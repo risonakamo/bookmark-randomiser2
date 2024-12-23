@@ -1,0 +1,16 @@
+# main features
+- session based randomising
+    - user selects folder to create new session. session remembers their progress and they can return to it
+    - user should be able to delete sessions
+    - sessions ordered in last time user accessed and performed an action in the session
+    - sessions should show this information:
+        - percent progress bar of getting through the items
+        - date session was created
+        - last date session was modified
+- list of recently accessed folders
+    - based on the user creating sessions
+    - not exactly sure if this is going to be useful with the sessions, so it can be lower priority unless it seems like users like to continuously refresh sessions
+- 1 button to generate/open tabs
+    - previously, too confusing to figure out which button to press. there should only be 1 button and it should be context aware to what it should do
+- figure out if there is an easier way of access the page. previously it was too low incentive to try to find the bookmark randomiser button in the extension menu
+    - maybe the minimum is to try a unique icon so it can be found more easily

@@ -3,7 +3,12 @@
     "short_name":"bm_random2",
     "description":"Randomise Bookmarks",
     "version":"2.0.0",
-    "homepage_url":"todo",
+    "homepage_url":"https://github.com/risonakamo/bookmark-randomiser2",
     "manifest_version":3,
-    "author":"risonakamo"
+    "author":"risonakamo",
+
+    "action":{
+        "default_title":"Bookmark Randomiser",
+        "default_popup":"build/session-create.html"
+    }
 }

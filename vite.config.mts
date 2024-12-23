@@ -48,8 +48,7 @@ export default defineConfig({
 
         rollupOptions:{
             input:{
-                // "reorder-page":`${__dirname}/web/html/reorder-page.html`,
-                // "rename-page":`${__dirname}/web/html/rename-page.html`,
+                "session-create":`${__dirname}/web/html/session-create.html`,
             },
 
             onLog(level:LogLevel,log:RollupLog,handler:LogHandler):void

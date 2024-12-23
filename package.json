@@ -6,9 +6,11 @@
     "w": "vite build -w true",
     "check": "svelte-check --threshold error"
   },
+  "type": "module",
   "dependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tsconfig/svelte": "^5.0.4",
+    "@types/chrome": "^0.0.287",
     "rollup": "^4.29.0",
     "sass": "^1.83.0",
     "svelte": "^5.15.0",

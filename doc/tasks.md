@@ -1,0 +1,5 @@
+- [ ] session create page, which is basically bookmark tree navigator
+    - would like to be able to select multiple folders
+    - selected folders should appear on a list, each folder should say how many items it has
+    - have a total of items for all selected folders
+    - click button to create session. later when create session page, this button should navigate to the newly created session
