@@ -47,5 +47,15 @@
                 </div>
             </div>
         </div>
+        <div class="submit">
+            <div class="totals">
+                <p class="text">Total</p>
+                <p class="count">1233</p>
+            </div>
+
+            <div class="submit-button">
+                <a href="">submit</a>
+            </div>
+        </div>
     </div>
 </main>

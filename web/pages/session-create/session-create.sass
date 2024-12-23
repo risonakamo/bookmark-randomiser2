@@ -4,6 +4,9 @@
 main
     display: flex
 
+p
+    margin: 0
+
 .browser
     flex: 1
 
@@ -19,6 +22,8 @@ main
     width: 300px
 
     .items
+        min-height: 300px
+
         .checkout-item
             padding: 10px
             cursor: pointer
@@ -32,3 +37,14 @@ main
 
             &:active
                 background: #cf29426a
+
+    .submit
+        padding: 10px
+        border-top: 1px solid
+
+        .totals
+            display: flex
+            margin-bottom: 15px
+
+            .text
+                flex: 1
