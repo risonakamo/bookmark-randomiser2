@@ -7,6 +7,10 @@
     "manifest_version":3,
     "author":"risonakamo",
 
+    "permissions":[
+        "bookmarks"
+    ],
+
     "action":{
         "default_title":"Bookmark Randomiser",
         "default_popup":"build/popup.html"

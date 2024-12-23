@@ -1,5 +1,29 @@
 <script lang="ts">
+import {onMount} from "svelte";
 
+import {getChildItems} from "@/lib/bookmark";
+
+// on page load, load initial bookmark items
+onMount(async ()=>{
+    const gotItems:BookmarkItem[]|null=await getChildItems([]);
+
+    if (gotItems==null)
+    {
+        console.error("failed to get items for some reason");
+    }
+
+    else
+    {
+        console.log(gotItems);
+        bookmarkItems=gotItems;
+    }
+});
+
+/** user's current folder path */
+var path:BookmarkPath=$state([]);
+
+/** the currently showing bookmark items */
+var bookmarkItems:BookmarkItem[]=$state([]);
 </script>
 
 <style lang="sass">
