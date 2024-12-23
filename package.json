@@ -11,6 +11,8 @@
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tsconfig/svelte": "^5.0.4",
     "@types/chrome": "^0.0.287",
+    "@types/lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "rollup": "^4.29.0",
     "sass": "^1.83.0",
     "svelte": "^5.15.0",
