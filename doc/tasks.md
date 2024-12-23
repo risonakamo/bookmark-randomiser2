@@ -4,5 +4,6 @@
     - have a total of items for all selected folders
     - click button to create session. later when create session page, this button should navigate to the newly created session
 - [x] look into bookmarks api to start rendering bookmarks browser
-- [ ] render the top level page of items
+- [x] render the top level page of items
 - [ ] implement navigation when clicking on items
+- [ ] implement functional path display with jumping when clicking

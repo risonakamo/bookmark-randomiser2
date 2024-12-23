@@ -2,6 +2,7 @@
 import {onMount} from "svelte";
 
 import {getChildItems} from "@/lib/bookmark";
+import BookmarkBrowser from "@/components/bookmark-browser/bookmark-browser.svelte";
 
 // on page load, load initial bookmark items
 onMount(async ()=>{
@@ -32,25 +33,7 @@ var bookmarkItems:BookmarkItem[]=$state([]);
 
 <main>
     <div class="browser">
-        <div class="path">
-            /
-            <div class="path-item"><a href="">thing</a></div>
-            /
-            <div class="path-item"><a href="">other thing</a></div>
-        </div>
-        <div class="folders">
-            <div class="folder">
-                <a href="">..</a>
-            </div>
-            <div class="folder">
-                <input type="checkbox"/>
-                <a href="">a folder</a>
-            </div>
-            <div class="folder">
-                <input type="checkbox"/>
-                <a href="">Another Folder</a>
-            </div>
-        </div>
+        <BookmarkBrowser items={bookmarkItems} path={path}/>
     </div>
     <div class="checkout">
         <div class="items">
