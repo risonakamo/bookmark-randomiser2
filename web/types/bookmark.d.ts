@@ -1,5 +1,8 @@
 // typings for bookmark lib
 
+/** path of titles (NOT IDS). if path is fully empty array, that is the
+ *  top level "other bookmarks folder".
+ *  todo: currently does not support the other folders */
 type BookmarkPath=string[]
 
 /** abstracted bookmark item. represents a folder that can be randomised upon */

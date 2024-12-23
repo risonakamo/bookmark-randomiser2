@@ -12,3 +12,4 @@
     - when displaying results, should show the entire path somewhere (maybe small and above text)
 - might be useful to display number of folders and items next to each item in the browser
     - should not allow navigating into a folder that has 0 other folders, as navigating into it would just have it be empty
+- how to convert the items state into derived, as it doesn't get mutated other than the change in path. but it comes from an async

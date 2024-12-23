@@ -4,9 +4,28 @@ import {onMount} from "svelte";
 import {getChildItems} from "@/lib/bookmark";
 import BookmarkBrowser from "@/components/bookmark-browser/bookmark-browser.svelte";
 
+/** user's current folder path */
+var path:BookmarkPath=$state([]);
+
+/** the currently showing bookmark items */
+var bookmarkItems:BookmarkItem[]=$state([]);
+
 // on page load, load initial bookmark items
-onMount(async ()=>{
-    const gotItems:BookmarkItem[]|null=await getChildItems([]);
+// onMount(()=>{
+//     refreshItems();
+// });
+
+// on path changing, refresh the items
+// todo: anyway to make items derived? it is async so doesn't seem like it?
+$effect(()=>{
+    path;
+    refreshItems();
+});
+
+/** reload the items based on the current path */
+async function refreshItems():Promise<void>
+{
+    const gotItems:BookmarkItem[]|null=await getChildItems(path);
 
     if (gotItems==null)
     {
@@ -15,16 +34,9 @@ onMount(async ()=>{
 
     else
     {
-        console.log(gotItems);
         bookmarkItems=gotItems;
     }
-});
-
-/** user's current folder path */
-var path:BookmarkPath=$state([]);
-
-/** the currently showing bookmark items */
-var bookmarkItems:BookmarkItem[]=$state([]);
+}
 </script>
 
 <style lang="sass">
@@ -33,7 +45,7 @@ var bookmarkItems:BookmarkItem[]=$state([]);
 
 <main>
     <div class="browser">
-        <BookmarkBrowser items={bookmarkItems} path={path}/>
+        <BookmarkBrowser items={bookmarkItems} bind:path={path}/>
     </div>
     <div class="checkout">
         <div class="items">
