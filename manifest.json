@@ -9,6 +9,6 @@
 
     "action":{
         "default_title":"Bookmark Randomiser",
-        "default_popup":"build/session-create.html"
+        "default_popup":"build/popup.html"
     }
 }

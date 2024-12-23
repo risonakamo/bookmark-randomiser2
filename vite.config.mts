@@ -49,6 +49,7 @@ export default defineConfig({
         rollupOptions:{
             input:{
                 "session-create":`${__dirname}/web/html/session-create.html`,
+                "popup":`${__dirname}/web/html/popup.html`,
             },
 
             onLog(level:LogLevel,log:RollupLog,handler:LogHandler):void
