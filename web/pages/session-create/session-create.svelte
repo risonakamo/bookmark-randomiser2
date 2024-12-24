@@ -3,6 +3,7 @@ import _ from "lodash";
 
 import {bookmarkItemsPathToStringPath, getChildItems} from "@/lib/bookmark";
 import BookmarkBrowser from "@/components/bookmark-browser/bookmark-browser.svelte";
+import Checkout from "@/components/checkout/checkout.svelte";
 
 /** user's current folder path */
 var path:BookmarkItem[]=$state([]);
@@ -47,33 +48,6 @@ async function refreshItems():Promise<void>
             bind:selectedItems={selectedItems}/>
     </div>
     <div class="checkout">
-        <div class="items">
-            <div class="checkout-item">
-                <div class="name">
-                    an item
-                </div>
-                <div class="count">
-                    12
-                </div>
-            </div>
-            <div class="checkout-item">
-                <div class="name">
-                    another / item
-                </div>
-                <div class="count">
-                    120
-                </div>
-            </div>
-        </div>
-        <div class="submit">
-            <div class="totals">
-                <p class="text">Total</p>
-                <p class="count">1233</p>
-            </div>
-
-            <div class="submit-button">
-                <a href="">submit</a>
-            </div>
-        </div>
+        <Checkout/>
     </div>
 </main>
