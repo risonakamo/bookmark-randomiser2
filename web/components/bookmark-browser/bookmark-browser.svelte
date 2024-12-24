@@ -94,15 +94,19 @@ function h_bookmarkItemSelected(targetItem:BookmarkItem)
         </div>
 
         {#each path as pathItem (pathItem.id)}
+            {@const isSelected:boolean=itemIsSelected(pathItem)}
             <div class="path-item">
                 <span>/</span>
-                <input type="checkbox"/>
+                <input type="checkbox" checked={isSelected}
+                    onchange={h_bookmarkItemSelected(pathItem)}
+                />
                 <a href="" onclick={h_clickPath(pathItem)}>
                     {pathItem.title}
                 </a>
             </div>
         {/each}
     </div>
+
     <div class="folders">
         <div class="folder">
             <a href="" onclick={h_upwardsClick}>..</a>
@@ -112,7 +116,8 @@ function h_bookmarkItemSelected(targetItem:BookmarkItem)
             {@const isSelected:boolean=itemIsSelected(item)}
             <div class="folder">
                 <input type="checkbox" onchange={h_bookmarkItemSelected(item)}
-                    checked={isSelected}/>
+                    checked={isSelected}
+                />
                 <a href="" onclick={h_folderClick(item)}>{item.title}</a>
             </div>
         {/each}

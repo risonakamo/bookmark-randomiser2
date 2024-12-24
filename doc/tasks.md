@@ -11,9 +11,10 @@
 - [x] track user selections
 - [x] modify selection component to use ids instead of paths
 - [x] modify selection component to also have paths of each selected item
-- [ ] modify path component to use bookmark item objs instead of path arrays
-- [ ] user selection should work in path component
-- [ ] show user selections in checkout area
+- [x] modify path component to use bookmark item objs instead of path arrays
+- [x] user selection should work in path component
+- [ ] show user selections in checkout area. should display number of items per selection
+- [ ] check out area totals counter
 
 # other
 - [x] optimise selected bookmark paths checking. could try hashing the bookmark paths so dont need to do array comparisons
