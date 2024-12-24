@@ -1,4 +1,6 @@
 <script lang="ts">
+import {expandPathToMiniPaths} from "@/lib/bookmark";
+
 var {
     // current path in the bookmark folder tree
     path=$bindable(),
@@ -9,6 +11,9 @@ var {
     path:BookmarkPath
     items:BookmarkItem[]
 }=$props();
+
+/** subpaths for all the bookmark items */
+var subPaths:BookmarkPath[]=$derived(expandPathToMiniPaths(path));
 
 /** clicked on a folder. append the folder to the path. curried */
 function h_folderClick(item:BookmarkItem)
@@ -28,6 +33,23 @@ function h_upwardsClick(e:MouseEvent):void
     path.pop();
     path=path;
 }
+
+/** clicked on a path item. change to the target path */
+function h_clickPath(targetPath:BookmarkPath)
+{
+    return (e:MouseEvent):void=>{
+        e.preventDefault();
+        path=targetPath;
+    };
+}
+
+/** clicked button to go to top level of bookmarks. reset path to
+ *  empty */
+function h_clickTop(e:MouseEvent):void
+{
+    e.preventDefault();
+    path=[];
+}
 </script>
 
 <style lang="sass">
@@ -36,10 +58,19 @@ function h_upwardsClick(e:MouseEvent):void
 
 <div class="bookmark-browser">
     <div class="path">
-        /
-        <div class="path-item"><a href="">thing</a></div>
-        /
-        <div class="path-item"><a href="">other thing</a></div>
+        <div class="path-item">
+            <a href="" onclick={h_clickTop}>top</a>
+        </div>
+
+        {#each path as pathItem,pathItemI (pathItem)}
+            <div class="path-item">
+                <span>/</span>
+                <input type="checkbox"/>
+                <a href="" onclick={h_clickPath(subPaths[pathItemI])}>
+                    {pathItem}
+                </a>
+            </div>
+        {/each}
     </div>
     <div class="folders">
         <div class="folder">

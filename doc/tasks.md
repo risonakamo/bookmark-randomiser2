@@ -6,5 +6,5 @@
 - [x] look into bookmarks api to start rendering bookmarks browser
 - [x] render the top level page of items
 - [x] navigation when clicking on items
-- [ ] functional path display with jumping when clicking
+- [x] functional path display with jumping when clicking
 - [ ] track user selections

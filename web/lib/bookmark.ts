@@ -90,6 +90,20 @@ export async function bookmarkIdToPath(id:string):Promise<BookmarkPath>
     }
 }
 
+/** given a bookmark path, expand it into a list of smaller bookmark paths,
+ *  where each item becomes all of the bookmark items up to that item.
+ *  ex:
+ *  [a,b,c] -> [[a],[a,b],[a,b,c]] */
+export function expandPathToMiniPaths(bookmarkPath:BookmarkPath):BookmarkPath[]
+{
+    const collectedPath:BookmarkPath=[];
+
+    return _.map(bookmarkPath,(pathItem:string):BookmarkPath=>{
+        collectedPath.push(pathItem);
+        return _.cloneDeep(collectedPath);
+    });
+}
+
 /** get bookmark item at requested path */
 async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
 {
