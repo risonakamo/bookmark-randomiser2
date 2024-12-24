@@ -1,5 +1,5 @@
 <script lang="ts">
-import {onMount} from "svelte";
+import _ from "lodash";
 
 import {getChildItems} from "@/lib/bookmark";
 import BookmarkBrowser from "@/components/bookmark-browser/bookmark-browser.svelte";
@@ -10,10 +10,8 @@ var path:BookmarkPath=$state([]);
 /** the currently showing bookmark items */
 var bookmarkItems:BookmarkItem[]=$state([]);
 
-// on page load, load initial bookmark items
-// onMount(()=>{
-//     refreshItems();
-// });
+/** list of selected bookmark folder paths */
+var selectedItems:BookmarkPath[]=$state([]);
 
 // on path changing, refresh the items
 // todo: anyway to make items derived? it is async so doesn't seem like it?
@@ -45,7 +43,8 @@ async function refreshItems():Promise<void>
 
 <main>
     <div class="browser">
-        <BookmarkBrowser items={bookmarkItems} bind:path={path}/>
+        <BookmarkBrowser items={bookmarkItems} bind:path={path}
+            bind:selectedItems={selectedItems}/>
     </div>
     <div class="checkout">
         <div class="items">
