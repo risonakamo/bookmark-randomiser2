@@ -14,7 +14,7 @@
 - [x] modify path component to use bookmark item objs instead of path arrays
 - [x] user selection should work in path component
 - [x] show user selections in checkout area. should display number of items per selection
-- [ ] check out area totals counter
+- [x] check out area totals counter
 - [ ] click items in check out to remove
 
 # other

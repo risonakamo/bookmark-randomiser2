@@ -1,9 +1,18 @@
 <script lang="ts">
+import _ from "lodash";
+
 var {
     selectedItems=$bindable([])
 }:{
     selectedItems:BookmarkItem[]
 }=$props();
+
+/** total count of inner bookmark items from selected bookmark folders */
+var itemCount:number=$derived.by(()=>{
+    return _.sumBy(selectedItems,(item:BookmarkItem):number=>{
+        return item.items;
+    });
+});
 </script>
 
 <style lang="sass">
@@ -29,7 +38,7 @@ var {
     <div class="submit">
         <div class="totals">
             <p class="text">Total</p>
-            <p class="count">1233</p>
+            <p class="count">{itemCount}</p>
         </div>
 
         <div class="submit-button">
