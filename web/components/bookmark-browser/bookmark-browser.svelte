@@ -14,7 +14,7 @@ var {
 }:{
     path:BookmarkPath
     items:BookmarkItem[]
-    selectedItems:BookmarkPath[]
+    selectedItems:BookmarkItem[]
 }=$props();
 
 /** subpaths for all the bookmark items */
@@ -27,11 +27,11 @@ var subPaths:BookmarkPath[]=$derived(expandPathToMiniPaths(path));
     return [...path,item];
 }
 
-/** check if a bookmark subpath is a selected path */
-function subPathIsSelected(subPath:BookmarkPath):boolean
+/** check if an item is in the selected items */
+function itemIsSelected(targetItem:BookmarkItem):boolean
 {
     return _.some(selectedItems,(item:BookmarkItem):boolean=>{
-        return _.isEqual(item,subPath);
+        return item.id==targetItem.id;
     });
 }
 
@@ -41,8 +41,7 @@ function h_folderClick(item:BookmarkItem)
     return (e:MouseEvent):void=>{
         e.preventDefault();
 
-        path=[...path,item.title]
-        console.log("new path",path);
+        path=[...path,item.title];
     };
 }
 
@@ -73,19 +72,19 @@ function h_clickTop(e:MouseEvent):void
 
 /** a bookmark item's path was selected or deselected. perform the corresponding
  *  action with the selected items array */
-function h_bookmarkPathSelected(targetPath:BookmarkPath)
+function h_bookmarkItemSelected(targetItem:BookmarkItem)
 {
     return (e:SvelteInputEvent):void=>{
         if (!e.currentTarget.checked)
         {
-            selectedItems=_.reject(selectedItems,(item:BookmarkPath):boolean=>{
-                return _.isEqual(item,targetPath);
+            selectedItems=_.reject(selectedItems,(item:BookmarkItem):boolean=>{
+                return item.id==targetItem.id;
             });
         }
 
         else
         {
-            selectedItems=[...selectedItems,targetPath];
+            selectedItems=[...selectedItems,targetItem];
         }
     };
 }
@@ -117,10 +116,9 @@ function h_bookmarkPathSelected(targetPath:BookmarkPath)
         </div>
 
         {#each items as item (item.id)}
-            {@const itemsPath:BookmarkPath=computeItemPath(item.title)}
-            {@const isSelected:boolean=subPathIsSelected(itemsPath)}
+            {@const isSelected:boolean=itemIsSelected(item)}
             <div class="folder">
-                <input type="checkbox" onchange={h_bookmarkPathSelected(itemsPath)}
+                <input type="checkbox" onchange={h_bookmarkItemSelected(item)}
                     checked={isSelected}/>
                 <a href="" onclick={h_folderClick(item)}>{item.title}</a>
             </div>

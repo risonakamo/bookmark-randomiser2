@@ -11,7 +11,7 @@ var path:BookmarkPath=$state([]);
 var bookmarkItems:BookmarkItem[]=$state([]);
 
 /** list of selected bookmark folder paths */
-var selectedItems:BookmarkPath[]=$state([]);
+var selectedItems:BookmarkItem[]=$state([]);
 
 // on path changing, refresh the items
 // todo: anyway to make items derived? it is async so doesn't seem like it?

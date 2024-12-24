@@ -9,7 +9,8 @@
 - [x] navigation when clicking on items
 - [x] functional path display with jumping when clicking
 - [x] track user selections
-- [ ] modify selection component to use ids instead of paths
+- [x] modify selection component to use ids instead of paths
+- [ ] modify selection component to also have paths of each selected item
 - [ ] user selection should work in path component
 - [ ] show user selections in checkout area
 
