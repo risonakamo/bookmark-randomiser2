@@ -24,7 +24,9 @@ export async function getChildItems(path:BookmarkPath):Promise<BookmarkItem[]|nu
     .filter((childNode:BookmarkTreeNode):boolean=>{
         return "children" in childNode;
     })
-    .map(bookmarkNodeToItem)
+    .map((childNode:BookmarkTreeNode):BookmarkItem=>{
+        return bookmarkNodeToItem(childNode,path);
+    })
     .value();
 }
 
@@ -115,7 +117,7 @@ async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
         throw "bookmark node error";
     }
 
-    return bookmarkNodeToItem(bookmarknode);
+    return bookmarkNodeToItem(bookmarknode,path);
 }
 
 /** get chrome bookmark node with bookmark path */
@@ -205,7 +207,7 @@ function countRealBookmarks(bookmarkNodes:BookmarkTreeNode[]):number
 }
 
 /** convert chrome bookmark node into abstracted form */
-function bookmarkNodeToItem(node:BookmarkTreeNode):BookmarkItem
+function bookmarkNodeToItem(node:BookmarkTreeNode,path:BookmarkPath):BookmarkItem
 {
     if (node.children==undefined)
     {
@@ -220,6 +222,7 @@ function bookmarkNodeToItem(node:BookmarkTreeNode):BookmarkItem
         title:node.title,
         id:node.id,
         items:realbookmarks,
-        dirs
+        dirs,
+        path:[...path,node.title],
     };
 }

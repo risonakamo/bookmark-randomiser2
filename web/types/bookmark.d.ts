@@ -16,6 +16,9 @@ interface BookmarkItem
 
     // number of real bookmarks in this bookmark item
     items:number
+
+    // path to this item, including itself
+    path:BookmarkPath
 }
 
 /** abstracted actual bookmark item. represents a bookmark itself that is NOT a folder */
