@@ -135,6 +135,12 @@ export function pruneBookmarkItemsPathUpToItem(
     return items.slice(0,targetIndex+1);
 }
 
+/** stringfy bookmark path array for printing */
+export function bookmarkPathToString(path:BookmarkPath):string
+{
+    return path.join(" / ");
+}
+
 /** get bookmark item at requested path */
 async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
 {

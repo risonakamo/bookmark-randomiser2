@@ -48,6 +48,6 @@ async function refreshItems():Promise<void>
             bind:selectedItems={selectedItems}/>
     </div>
     <div class="checkout">
-        <Checkout/>
+        <Checkout bind:selectedItems={selectedItems}/>
     </div>
 </main>

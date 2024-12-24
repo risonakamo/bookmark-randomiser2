@@ -13,8 +13,9 @@
 - [x] modify selection component to also have paths of each selected item
 - [x] modify path component to use bookmark item objs instead of path arrays
 - [x] user selection should work in path component
-- [ ] show user selections in checkout area. should display number of items per selection
+- [x] show user selections in checkout area. should display number of items per selection
 - [ ] check out area totals counter
+- [ ] click items in check out to remove
 
 # other
 - [x] optimise selected bookmark paths checking. could try hashing the bookmark paths so dont need to do array comparisons

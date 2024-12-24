@@ -1,5 +1,9 @@
 <script lang="ts">
-
+var {
+    selectedItems=$bindable([])
+}:{
+    selectedItems:BookmarkItem[]
+}=$props();
 </script>
 
 <style lang="sass">
@@ -8,22 +12,19 @@
 
 <div class="checkout">
     <div class="items">
-        <div class="checkout-item">
-            <div class="name">
-                an item
+        {#each selectedItems as item (item.id)}
+            <div class="checkout-item">
+                <div class="name">
+                    {#each item.path as pathItem (pathItem)}
+                        <span class="slash">/</span>
+                        <span class="path-item">{pathItem}</span>
+                    {/each}
+                </div>
+                <div class="count">
+                    {item.items}
+                </div>
             </div>
-            <div class="count">
-                12
-            </div>
-        </div>
-        <div class="checkout-item">
-            <div class="name">
-                another / item
-            </div>
-            <div class="count">
-                120
-            </div>
-        </div>
+        {/each}
     </div>
     <div class="submit">
         <div class="totals">
