@@ -1,7 +1,7 @@
 <script lang="ts">
 import _ from "lodash";
 
-import {expandPathToMiniPaths} from "@/lib/bookmark";
+import {pruneBookmarkItemsPathUpToItem} from "@/lib/bookmark";
 
 var {
     // current path in the bookmark folder tree
@@ -12,20 +12,10 @@ var {
 
     selectedItems=$bindable([]),
 }:{
-    path:BookmarkPath
+    path:BookmarkItem[]
     items:BookmarkItem[]
     selectedItems:BookmarkItem[]
 }=$props();
-
-/** subpaths for all the bookmark items */
-var subPaths:BookmarkPath[]=$derived(expandPathToMiniPaths(path));
-
-/** compute sub path for a single bookmark item by adding the item to the
- *  current path */
- function computeItemPath(item:string):BookmarkPath
-{
-    return [...path,item];
-}
 
 /** check if an item is in the selected items */
 function itemIsSelected(targetItem:BookmarkItem):boolean
@@ -41,7 +31,7 @@ function h_folderClick(item:BookmarkItem)
     return (e:MouseEvent):void=>{
         e.preventDefault();
 
-        path=[...path,item.title];
+        path=[...path,item];
     };
 }
 
@@ -54,11 +44,14 @@ function h_upwardsClick(e:MouseEvent):void
 }
 
 /** clicked on a path item. change to the target path */
-function h_clickPath(targetPath:BookmarkPath)
+function h_clickPath(targetItem:BookmarkItem)
 {
     return (e:MouseEvent):void=>{
         e.preventDefault();
-        path=targetPath;
+        path=pruneBookmarkItemsPathUpToItem(
+            path,
+            targetItem,
+        );
     };
 }
 
@@ -100,12 +93,12 @@ function h_bookmarkItemSelected(targetItem:BookmarkItem)
             <a href="" onclick={h_clickTop}>top</a>
         </div>
 
-        {#each path as pathItem,pathItemI (pathItem)}
+        {#each path as pathItem (pathItem.id)}
             <div class="path-item">
                 <span>/</span>
                 <input type="checkbox"/>
-                <a href="" onclick={h_clickPath(subPaths[pathItemI])}>
-                    {pathItem}
+                <a href="" onclick={h_clickPath(pathItem)}>
+                    {pathItem.title}
                 </a>
             </div>
         {/each}

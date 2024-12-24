@@ -1,11 +1,11 @@
 <script lang="ts">
 import _ from "lodash";
 
-import {getChildItems} from "@/lib/bookmark";
+import {bookmarkItemsPathToStringPath, getChildItems} from "@/lib/bookmark";
 import BookmarkBrowser from "@/components/bookmark-browser/bookmark-browser.svelte";
 
 /** user's current folder path */
-var path:BookmarkPath=$state([]);
+var path:BookmarkItem[]=$state([]);
 
 /** the currently showing bookmark items */
 var bookmarkItems:BookmarkItem[]=$state([]);
@@ -23,7 +23,7 @@ $effect(()=>{
 /** reload the items based on the current path */
 async function refreshItems():Promise<void>
 {
-    const gotItems:BookmarkItem[]|null=await getChildItems(path);
+    const gotItems:BookmarkItem[]|null=await getChildItems(bookmarkItemsPathToStringPath(path));
 
     if (gotItems==null)
     {

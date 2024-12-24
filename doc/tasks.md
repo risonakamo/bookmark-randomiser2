@@ -10,9 +10,11 @@
 - [x] functional path display with jumping when clicking
 - [x] track user selections
 - [x] modify selection component to use ids instead of paths
-- [ ] modify selection component to also have paths of each selected item
+- [x] modify selection component to also have paths of each selected item
+- [ ] modify path component to use bookmark item objs instead of path arrays
 - [ ] user selection should work in path component
 - [ ] show user selections in checkout area
 
 # other
-- optimise selected bookmark paths checking. could try hashing the bookmark paths so dont need to do array comparisons
+- [x] optimise selected bookmark paths checking. could try hashing the bookmark paths so dont need to do array comparisons
+    - completed now using ids for selected items instead of path comparison

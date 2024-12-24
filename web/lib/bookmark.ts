@@ -106,6 +106,35 @@ export function expandPathToMiniPaths(bookmarkPath:BookmarkPath):BookmarkPath[]
     });
 }
 
+/** convert a list of bookmark items representing a path into the basic string path */
+export function bookmarkItemsPathToStringPath(items:BookmarkItem[]):BookmarkPath
+{
+    return _.map(items,(item:BookmarkItem):string=>{
+        return item.title;
+    });
+}
+
+/** given a path made up of bookmark items, find a target item and remove all after that item,
+ *  leaving the target item as the last item. if item was not there, does nothing */
+export function pruneBookmarkItemsPathUpToItem(
+    items:BookmarkItem[],
+    targetItem:BookmarkItem
+):BookmarkItem[]
+{
+    const targetIndex:number=_.findIndex(items,(item:BookmarkItem):boolean=>{
+        return item.id==targetItem.id;
+    });
+
+    if (targetIndex<0)
+    {
+        console.error("failed to find",targetItem);
+        console.error(items);
+        return items;
+    }
+
+    return items.slice(0,targetIndex+1);
+}
+
 /** get bookmark item at requested path */
 async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
 {
