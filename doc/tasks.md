@@ -1,3 +1,4 @@
+# main
 - [x] session create page, which is basically bookmark tree navigator
     - would like to be able to select multiple folders
     - selected folders should appear on a list, each folder should say how many items it has
@@ -7,4 +8,10 @@
 - [x] render the top level page of items
 - [x] navigation when clicking on items
 - [x] functional path display with jumping when clicking
-- [ ] track user selections
+- [x] track user selections
+- [ ] modify selection component to use ids instead of paths
+- [ ] user selection should work in path component
+- [ ] show user selections in checkout area
+
+# other
+- optimise selected bookmark paths checking. could try hashing the bookmark paths so dont need to do array comparisons

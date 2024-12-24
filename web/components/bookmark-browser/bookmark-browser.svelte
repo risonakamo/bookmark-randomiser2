@@ -20,10 +20,6 @@ var {
 /** subpaths for all the bookmark items */
 var subPaths:BookmarkPath[]=$derived(expandPathToMiniPaths(path));
 
-$effect(()=>{
-    console.log("selected",selectedItems);
-});
-
 /** compute sub path for a single bookmark item by adding the item to the
  *  current path */
  function computeItemPath(item:string):BookmarkPath
@@ -80,14 +76,11 @@ function h_clickTop(e:MouseEvent):void
 function h_bookmarkPathSelected(targetPath:BookmarkPath)
 {
     return (e:SvelteInputEvent):void=>{
-        console.log("selecting",targetPath);
-        console.log("new val",e.currentTarget.checked);
         if (!e.currentTarget.checked)
         {
-            selectedItems=_.filter(selectedItems,(item:BookmarkPath):boolean=>{
+            selectedItems=_.reject(selectedItems,(item:BookmarkPath):boolean=>{
                 return _.isEqual(item,targetPath);
             });
-            console.log("removal",selectedItems);
         }
 
         else
