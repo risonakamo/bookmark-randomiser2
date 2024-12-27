@@ -1,4 +1,8 @@
-# main
+# main page
+- [ ] setup main page
+- [ ] design initial list of session blocks
+
+# session create
 - [x] session create page, which is basically bookmark tree navigator
     - would like to be able to select multiple folders
     - selected folders should appear on a list, each folder should say how many items it has
@@ -17,6 +21,6 @@
 - [x] check out area totals counter
 - [x] click items in check out to remove
 
-# other
+## 2
 - [x] optimise selected bookmark paths checking. could try hashing the bookmark paths so dont need to do array comparisons
     - completed now using ids for selected items instead of path comparison
