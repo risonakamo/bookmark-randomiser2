@@ -13,6 +13,16 @@ var itemCount:number=$derived.by(()=>{
         return item.items;
     });
 });
+
+/** clicked on a checkout item. remove it from selected items */
+function h_checkoutItemClick(item:BookmarkItem)
+{
+    return ()=>{
+        selectedItems=_.reject(selectedItems,(anItem:BookmarkItem):boolean=>{
+            return anItem.id==item.id;
+        });
+    };
+}
 </script>
 
 <style lang="sass">
@@ -22,7 +32,7 @@ var itemCount:number=$derived.by(()=>{
 <div class="checkout">
     <div class="items">
         {#each selectedItems as item (item.id)}
-            <div class="checkout-item">
+            <div class="checkout-item" onclick={h_checkoutItemClick(item)}>
                 <div class="name">
                     {#each item.path as pathItem (pathItem)}
                         <span class="slash">/</span>

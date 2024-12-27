@@ -1,10 +1,10 @@
 # prototype features
-- [ ] navigate through bookmarks
-- [ ] select folders with check, it should appear in the checkout zone
-- [ ] selected folders should show number of bookmarks
-- [ ] should show total bookmarks when session created
-- [ ] path navigation should work
-- [ ] bookmark folder browser should show items/folders inside of each item to help with navigation
+- [x] navigate through bookmarks
+- [x] select folders with check, it should appear in the checkout zone
+- [x] selected folders should show number of bookmarks
+- [x] should show total bookmarks when session created
+- [x] path navigation should work
+- [ ] bookmark folder browser should show number of items/folders inside of each item to help with navigation
     - should it disable navigating into folder with 0 other folders?
 
 # other ideas
