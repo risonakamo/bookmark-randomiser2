@@ -5,8 +5,11 @@
 - [ ] implement actual session creation
     - [x] design local storage typing
     - [x] function to create a session
-    - [ ] function to add session to localstorage
-    - [ ] have session create page button call this function. should also navigate back to session select after creating
+    - [x] function to add session to localstorage
+    - [x] have session create page button call this function. should also navigate back to session select after creating
+    - [x] function to collect bookmark items from list of bookmark folders
+    - [ ] update session create to use the retrieved bookmark items
+- [ ] dont allow pressing submit button if no items selected
 
 # session create
 - [x] session create page, which is basically bookmark tree navigator

@@ -1,9 +1,11 @@
 <script lang="ts">
 import _ from "lodash";
+import {onMount} from "svelte";
 
 import {bookmarkItemsPathToStringPath, getChildItems} from "@/lib/bookmark";
 import BookmarkBrowser from "@/components/bookmark-browser/bookmark-browser.svelte";
 import Checkout from "@/components/checkout/checkout.svelte";
+import {getSessions} from "@/lib/storage";
 
 /** user's current folder path */
 var path:BookmarkItem[]=$state([]);
@@ -19,6 +21,10 @@ var selectedItems:BookmarkItem[]=$state([]);
 $effect(()=>{
     path;
     refreshItems();
+});
+
+onMount(async ()=>{
+    console.log(await getSessions());
 });
 
 /** reload the items based on the current path */

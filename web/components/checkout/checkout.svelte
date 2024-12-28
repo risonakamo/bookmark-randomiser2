@@ -1,6 +1,10 @@
 <script lang="ts">
 import _ from "lodash";
 
+import {createSession} from "@/lib/session";
+import {addSession} from "@/lib/storage";
+import {getChildItemsMultiple} from "@/lib/bookmark";
+
 var {
     selectedItems=$bindable([])
 }:{
@@ -22,6 +26,30 @@ function h_checkoutItemClick(item:BookmarkItem)
             return anItem.id==item.id;
         });
     };
+}
+
+/** clicked submit. create new session from the selected items and push to storage */
+async function h_submit(e:MouseEvent):Promise<void>
+{
+    e.preventDefault();
+
+    if (!selectedItems.length)
+    {
+        console.log("no items, not making session");
+        return;
+    }
+
+    var items:RealBookmarkItem[]=await getChildItemsMultiple(
+        _.map(selectedItems,(item:BookmarkItem):string=>{
+            return item.id;
+        })
+    );
+
+    items=_.shuffle(items);
+
+    console.log(items);
+
+    // addSession(createSession([],selectedItems));
 }
 </script>
 
@@ -52,7 +80,7 @@ function h_checkoutItemClick(item:BookmarkItem)
         </div>
 
         <div class="submit-button">
-            <a href="">submit</a>
+            <a href="" onclick={h_submit}>submit</a>
         </div>
     </div>
 </div>

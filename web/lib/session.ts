@@ -10,7 +10,7 @@ export function createSession(
 ):RandomisationSession
 {
     return {
-        id:window.crypto.randomUUID().slice(0,7),
+        id:window.crypto.randomUUID().slice(0,10),
 
         items,
 

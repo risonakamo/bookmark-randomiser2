@@ -72,6 +72,18 @@ export async function getRealBookmarkItems(id:string):Promise<RealBookmarkItem[]
     .value();
 }
 
+/** get real bookmarks of all target ids */
+export async function getChildItemsMultiple(ids:string[]):Promise<RealBookmarkItem[]>
+{
+    const items:RealBookmarkItem[][]=await Promise.all(
+        _.map(ids,(id:string):Promise<RealBookmarkItem[]>=>{
+            return getRealBookmarkItems(id);
+        })
+    );
+
+    return _.flatten(items);
+}
+
 /** convert bookmark id to bookmark path */
 export async function bookmarkIdToPath(id:string):Promise<BookmarkPath>
 {
