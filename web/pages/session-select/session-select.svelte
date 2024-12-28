@@ -7,6 +7,9 @@
 </style>
 
 <main>
+    <div class="toolbar">
+        <h2><a href="/build/session-create.html">create session</a></h2>
+    </div>
     <div class="sessions">
         <div class="session">
             <h2><a href="">some kind of title</a></h2>

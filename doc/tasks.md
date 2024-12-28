@@ -1,10 +1,11 @@
 # main page
 - [x] setup main page
 - [x] design initial list of session blocks
-- [ ] add button to go to session create page
+- [x] add button to go to session create page
 - [ ] implement actual session creation
-    - [ ] design local storage typing
-    - [ ] function to create a session which pushes into local storage
+    - [x] design local storage typing
+    - [x] function to create a session
+    - [ ] function to add session to localstorage
     - [ ] have session create page button call this function. should also navigate back to session select after creating
 
 # session create
