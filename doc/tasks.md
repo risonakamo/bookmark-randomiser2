@@ -1,6 +1,11 @@
 # main page
-- [ ] setup main page
-- [ ] design initial list of session blocks
+- [x] setup main page
+- [x] design initial list of session blocks
+- [ ] add button to go to session create page
+- [ ] implement actual session creation
+    - [ ] design local storage typing
+    - [ ] function to create a session which pushes into local storage
+    - [ ] have session create page button call this function. should also navigate back to session select after creating
 
 # session create
 - [x] session create page, which is basically bookmark tree navigator
