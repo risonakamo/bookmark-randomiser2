@@ -21,6 +21,9 @@ main features:
     - title of session
     - origin dirs of the session
     - create/update date
+- indicator of how many items went through in the current tab. to give an idea of how many have seen so far
+- clicking open, should immediately move to the 1st tab opened
+- number count next to each bookmark item like from prev
 
 # other ideas
 - with the single button, still need to press it twice to open. does this get annoying? what about a generate and open button, or checkbox that enables this

@@ -1,6 +1,7 @@
 # randomisation page
 - [x] setup page
 - [x] design layout
+- [ ] add secondary progress counter
 - [ ] url query for data loading
 - [ ] get components functional
 
