@@ -10,8 +10,12 @@
     - [x] function to collect bookmark items from list of bookmark folders
     - [x] update session create to use the retrieved bookmark items
 - [x] dont allow pressing submit button if no items selected
-- [ ] render sessions in storage
-- [ ] add clear sessions button
+- [x] render sessions in storage
+- [x] add clear sessions button
+- [ ] items list not working
+- [ ] figure out what to do for the title
+- [ ] order by last updated
+- [ ] text when there is no sessions
 
 # session create
 - [x] session create page, which is basically bookmark tree navigator
