@@ -1,3 +1,12 @@
+# randomisation page
+- [ ] setup page
+- [ ] design layout
+- [ ] url query for data loading
+- [ ] get components functional
+
+# general
+- [ ] back buttons on all pages to go to select page
+
 # main page
 - [x] setup main page
 - [x] design initial list of session blocks
