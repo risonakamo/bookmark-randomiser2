@@ -50,6 +50,7 @@ export default defineConfig({
             input:{
                 "session-create":`${__dirname}/web/html/session-create.html`,
                 "session-select":`${__dirname}/web/html/session-select.html`,
+                "randomiser":`${__dirname}/web/html/randomiser.html`,
                 "popup":`${__dirname}/web/html/popup.html`,
             },
 
