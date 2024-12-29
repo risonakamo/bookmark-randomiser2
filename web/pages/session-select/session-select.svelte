@@ -2,13 +2,14 @@
 import {onMount} from "svelte";
 
 import {getSessions} from "@/lib/storage";
+import {createSessionTitle, sortSessions} from "@/lib/session";
 
 /** the sessions */
 var sessions:RandomisationSession[]=$state([]);
 
 // get sessions from storage
 onMount(async ()=>{
-    sessions=await getSessions();
+    sessions=sortSessions(await getSessions());
     console.log(sessions);
 });
 
@@ -30,23 +31,27 @@ function h_resetButton():void
         <h2><a href="" onclick={h_resetButton}>reset storage</a></h2>
     </div>
     <div class="sessions">
-        {#each sessions as session (session.id)}
-            <div class="session">
-                <h2><a href="">some kind of title</a></h2>
-                <p>created: {session.createdDate}</p>
-                <p>updated: {session.lastUpdateDate}</p>
-                <p>progress: {session.position}/{session.items.length}</p>
-                <p>items:</p>
-                <ul>
-                    {#each session.originDirs as originDir (originDir.id)}
-                        <li>{originDir.title}</li>
-                    {/each}
-                </ul>
-                <div class="controls">
-                    <a href="">delete</a>
-                    <a href="">duplicate</a>
+        {#if sessions.length>0}
+            {#each sessions as session (session.id)}
+                <div class="session">
+                    <h2><a href="">{createSessionTitle(session)}</a></h2>
+                    <p>created: {session.createdDate}</p>
+                    <p>updated: {session.lastUpdateDate}</p>
+                    <p>progress: {session.position}/{session.items.length}</p>
+                    <p>items:</p>
+                    <ul>
+                        {#each session.originDirs as originDir (session.id+originDir.id)}
+                            <li>{originDir.title}</li>
+                        {/each}
+                    </ul>
+                    <div class="controls">
+                        <a href="">delete</a>
+                        <a href="">duplicate</a>
+                    </div>
                 </div>
-            </div>
-        {/each}
+            {/each}
+        {:else}
+            <p>no sessions</p>
+        {/if}
     </div>
 </main>

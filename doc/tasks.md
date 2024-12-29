@@ -12,10 +12,11 @@
 - [x] dont allow pressing submit button if no items selected
 - [x] render sessions in storage
 - [x] add clear sessions button
-- [ ] items list not working
-- [ ] figure out what to do for the title
-- [ ] order by last updated
-- [ ] text when there is no sessions
+- [x] items list not working
+- [x] figure out what to do for the title
+- [x] order by last updated
+- [x] text when there is no sessions
+- move on to randomisation page
 
 # session create
 - [x] session create page, which is basically bookmark tree navigator

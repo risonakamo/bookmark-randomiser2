@@ -21,3 +21,4 @@
 
 # other considerations
 - in session objs, it is currently storing the whole list of all bookmark item objects which is kind of needlessly expensive. later optimise so only stores the ids, and when needed can upgrade to full obj
+- session title needs to help user to find the one they are looking for. need to test to see what works

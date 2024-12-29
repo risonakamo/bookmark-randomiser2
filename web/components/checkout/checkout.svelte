@@ -50,7 +50,7 @@ async function h_submit(e:MouseEvent):Promise<void>
 
     items=_.shuffle(items);
 
-    await addSession(createSession(items,selectedItems));
+    await addSession(createSession(items,$state.snapshot(selectedItems)));
 
     window.location.href="/build/session-select.html";
 }
