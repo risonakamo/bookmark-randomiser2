@@ -1,11 +1,12 @@
 # randomisation page
-- [ ] setup page
-- [ ] design layout
+- [x] setup page
+- [x] design layout
 - [ ] url query for data loading
 - [ ] get components functional
 
 # general
 - [ ] back buttons on all pages to go to select page
+- [ ] target date displays and change to "relative time" dates (ex: 10 days ago)
 
 # main page
 - [x] setup main page
