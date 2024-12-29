@@ -18,3 +18,6 @@
 - figure out if there is an easier way of access the page. previously it was too low incentive to try to find the bookmark randomiser button in the extension menu
     - maybe the minimum is to try a unique icon so it can be found more easily
 - session create page allowing for multiple folder selections
+
+# other considerations
+- in session objs, it is currently storing the whole list of all bookmark item objects which is kind of needlessly expensive. later optimise so only stores the ids, and when needed can upgrade to full obj

@@ -1,5 +1,10 @@
 <script lang="ts">
+import {getSessions} from "@/lib/storage";
+import {onMount} from "svelte";
 
+onMount(async ()=>{
+    console.log(await getSessions());
+});
 </script>
 
 <style lang="sass">

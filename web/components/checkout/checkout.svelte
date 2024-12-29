@@ -18,6 +18,9 @@ var itemCount:number=$derived.by(()=>{
     });
 });
 
+/** can't submit if no items */
+var submitDisabled:boolean=$derived(itemCount==0);
+
 /** clicked on a checkout item. remove it from selected items */
 function h_checkoutItemClick(item:BookmarkItem)
 {
@@ -47,9 +50,9 @@ async function h_submit(e:MouseEvent):Promise<void>
 
     items=_.shuffle(items);
 
-    console.log(items);
+    await addSession(createSession(items,selectedItems));
 
-    // addSession(createSession([],selectedItems));
+    window.location.href="/build/session-select.html";
 }
 </script>
 
@@ -80,7 +83,7 @@ async function h_submit(e:MouseEvent):Promise<void>
         </div>
 
         <div class="submit-button">
-            <a href="" onclick={h_submit}>submit</a>
+            <a href="" onclick={h_submit} class:disabled={submitDisabled}>submit</a>
         </div>
     </div>
 </div>
