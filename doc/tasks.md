@@ -3,7 +3,7 @@
 - [x] design layout
 - [x] add secondary progress counter
 - [x] url query for data loading
-- [ ] selector page links to randomiser page using url query
+- [x] selector page links to randomiser page using url query
 - [ ] get components functional
 
 # general

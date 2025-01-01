@@ -9,3 +9,13 @@ export function randomiserUrlArgs():RandomiserPageArgs
         sessionId:params.get("sessionId") || undefined
     };
 }
+
+/** create url to go to randomiser page with session id */
+export function createRandomiserUrl(sessionId:string):string
+{
+    const params=new URLSearchParams({
+        sessionId,
+    } satisfies RandomiserPageArgs);
+
+    return `/build/randomiser.html?${params}`;
+}

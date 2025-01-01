@@ -3,6 +3,7 @@ import {onMount} from "svelte";
 
 import {getSessions} from "@/lib/storage";
 import {createSessionTitle, sortSessions} from "@/lib/session";
+import {createRandomiserUrl} from "@/lib/url-query";
 
 /** the sessions */
 var sessions:RandomisationSession[]=$state([]);
@@ -33,8 +34,11 @@ function h_resetButton():void
     <div class="sessions">
         {#if sessions.length>0}
             {#each sessions as session (session.id)}
+                {@const randomiserUrl:string=createRandomiserUrl(session.id)}
                 <div class="session">
-                    <h2><a href="">{createSessionTitle(session)}</a></h2>
+                    <h2>
+                        <a href={randomiserUrl}>{createSessionTitle(session)}</a>
+                    </h2>
                     <p>created: {session.createdDate}</p>
                     <p>updated: {session.lastUpdateDate}</p>
                     <p>progress: {session.position}/{session.items.length}</p>
