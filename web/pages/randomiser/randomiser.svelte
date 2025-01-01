@@ -1,5 +1,35 @@
 <script lang="ts">
+import {onMount} from "svelte";
 
+import {getSession, getSessions} from "@/lib/storage";
+import {randomiserUrlArgs} from "@/lib/url-query";
+
+/** the current session */
+var session:RandomisationSession|undefined=$state(undefined);
+
+// on page load, try to load the session indicated by url args
+onMount(async ()=>{
+    const args:RandomiserPageArgs=randomiserUrlArgs();
+
+    if (!args.sessionId)
+    {
+        console.error("did not provide session id");
+        return;
+    }
+
+    const foundSession:RandomisationSession|undefined=await getSession(args.sessionId);
+
+    if (!foundSession)
+    {
+        console.error("could not find target session:",args.sessionId);
+        console.error("available sessions:");
+        console.log(await getSessions());
+        return;
+    }
+
+    session=foundSession;
+    console.log("loaded",session);
+});
 </script>
 
 <style lang="sass">
@@ -18,7 +48,8 @@
     </div>
 
     <div class="progress">
-        progress: 0 / 1000
+        <p>progress: 0 / 1000</p>
+        <p>10 items opened</p>
     </div>
 
     <div class="buttons">

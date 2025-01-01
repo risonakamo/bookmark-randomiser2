@@ -1,8 +1,9 @@
 # randomisation page
 - [x] setup page
 - [x] design layout
-- [ ] add secondary progress counter
-- [ ] url query for data loading
+- [x] add secondary progress counter
+- [x] url query for data loading
+- [ ] selector page links to randomiser page using url query
 - [ ] get components functional
 
 # general
@@ -13,7 +14,7 @@
 - [x] setup main page
 - [x] design initial list of session blocks
 - [x] add button to go to session create page
-- [ ] implement actual session creation
+- [x] implement actual session creation
     - [x] design local storage typing
     - [x] function to create a session
     - [x] function to add session to localstorage

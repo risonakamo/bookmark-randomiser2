@@ -21,7 +21,7 @@ main features:
     - title of session
     - origin dirs of the session
     - create/update date
-- indicator of how many items went through in the current tab. to give an idea of how many have seen so far
+- indicator of how many items went through in the current tab. to give an idea of how many have seen so far (secondary progress count)
 - clicking open, should immediately move to the 1st tab opened
 - number count next to each bookmark item like from prev
 
