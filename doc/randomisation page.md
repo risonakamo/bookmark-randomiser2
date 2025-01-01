@@ -41,3 +41,19 @@ based on features, here are the components to fulfil the features
 - [ ] links display
 - [ ] session information display
 - [ ] progress bar
+
+# page randomisation logic
+- on page start, page is in generate mode with 0 items. automatically execute the generate action as if user pressed the button
+- on pressing generate, looks at position and grabs the relevant items
+    - if position is over the limit, then generates nothing
+    - switches mode to open, so the next button press will open the items
+- on pressing to open the items, opens the currently active items, then advances the position the same amount as the generate amount
+    - switches the mode to generate, so next press generates more items
+- in generate and open mode
+    - each press opens the current items, advances, then generates more
+    - so, it is like the page is in open mode always, except after opening the generate action occurs immediately, placing it back into open mode
+
+## additional logic
+- keep a count of items consumed. consumed count increments only when the position is advanced
+- position count should always be accurate to the true position
+- the number next to each item should follow the index number of the item in the items array
