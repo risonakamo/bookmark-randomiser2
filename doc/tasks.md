@@ -4,6 +4,7 @@
 - [x] add secondary progress counter
 - [x] url query for data loading
 - [x] selector page links to randomiser page using url query
+- [ ] design out page randomisation position logic
 - [ ] get components functional
 
 # general

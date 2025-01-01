@@ -3,9 +3,17 @@ import {onMount} from "svelte";
 
 import {getSession, getSessions} from "@/lib/storage";
 import {randomiserUrlArgs} from "@/lib/url-query";
+import {createSessionTitle} from "@/lib/session";
 
 /** the current session */
-var session:RandomisationSession|undefined=$state(undefined);
+var session:RandomisationSession=$state({
+    id:"",
+    items:[],
+    position:0,
+    createdDate:"",
+    lastUpdateDate:"",
+    originDirs:[],
+});
 
 // on page load, try to load the session indicated by url args
 onMount(async ()=>{
@@ -38,12 +46,13 @@ onMount(async ()=>{
 
 <main>
     <div class="info">
-        <h1>title of thing</h1>
-        <p>created: 2024/12/14 12:20</p>
-        <p>updated: 10 mins ago</p>
+        <h1>{createSessionTitle(session)}</h1>
+        <p>created: {session.createdDate}</p>
+        <p>updated: {session.lastUpdateDate}</p>
         <ul>
-            <li>dir 1</li>
-            <li>dir 2</li>
+            {#each session.originDirs as originDir (originDir.id)}
+                <li>{originDir.title}</li>
+            {/each}
         </ul>
     </div>
 
@@ -58,7 +67,7 @@ onMount(async ()=>{
     </div>
 
     <div class="items">
-        <ul>
+        <ol>
             <li class="item">
                 <div class="icon"></div>
                 <a href="">item name</a>
@@ -71,6 +80,6 @@ onMount(async ()=>{
                 <div class="icon"></div>
                 <a href="">item name</a>
             </li>
-        </ul>
+        </ol>
     </div>
 </main>
