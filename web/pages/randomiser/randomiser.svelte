@@ -5,6 +5,9 @@ import {getSession, getSessions} from "@/lib/storage";
 import {randomiserUrlArgs} from "@/lib/url-query";
 import {createSessionTitle} from "@/lib/session";
 
+/** items per generation */
+const generateAmount:number=10;
+
 /** the current session */
 var session:RandomisationSession=$state({
     id:"",
@@ -15,7 +18,11 @@ var session:RandomisationSession=$state({
     originDirs:[],
 });
 
-// on page load, try to load the session indicated by url args
+/** the currently showing items */
+var items:RealBookmarkItem[]=[];
+
+// on page load, try to load the session indicated by url args. then, do initial generation
+// based on the position.
 onMount(async ()=>{
     const args:RandomiserPageArgs=randomiserUrlArgs();
 
@@ -36,8 +43,23 @@ onMount(async ()=>{
     }
 
     session=foundSession;
+    generateItems();
+
     console.log("loaded",session);
+    console.log("items",items);
 });
+
+/** load the current items given the current position */
+function generateItems():void
+{
+    if (session.position>=session.items.length)
+    {
+        items=[];
+        return;
+    }
+
+    items=session.items.slice(session.position,session.position+generateAmount);
+}
 </script>
 
 <style lang="sass">
@@ -67,9 +89,10 @@ onMount(async ()=>{
     </div>
 
     <div class="items">
-        <ol>
+        <ul>
             <li class="item">
-                <div class="icon"></div>
+                <span>1.</span>
+                <span class="icon"></span>
                 <a href="">item name</a>
             </li>
             <li class="item">
@@ -80,6 +103,6 @@ onMount(async ()=>{
                 <div class="icon"></div>
                 <a href="">item name</a>
             </li>
-        </ol>
+        </ul>
     </div>
 </main>
