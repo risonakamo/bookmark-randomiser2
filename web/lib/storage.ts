@@ -2,6 +2,8 @@
 
 import _ from "lodash";
 
+import {getTimestamp} from "@/lib/util";
+
 /** add a session to the storage */
 export async function addSession(session:RandomisationSession):Promise<void>
 {
@@ -30,4 +32,26 @@ export async function getSession(id:string):Promise<RandomisationSession|undefin
     return _.find(sessions,(session:RandomisationSession):boolean=>{
         return session.id==id;
     });
+}
+
+/** update a session's position */
+export async function updateSession(id:string,position:number):Promise<void>
+{
+    const gotStorage:Storage=await chrome.storage.local.get<Storage>("sessions");
+    var sessions:RandomisationSession[]=gotStorage.sessions || [];
+
+    const foundSession:RandomisationSession|undefined=_.find(sessions,(session:RandomisationSession):boolean=>{
+        return session.id==id;
+    });
+
+    if (!foundSession)
+    {
+        console.error("failed to find session to update:",id);
+        return;
+    }
+
+    foundSession.position=position;
+    foundSession.lastUpdateDate=getTimestamp();
+
+    chrome.storage.local.set(gotStorage);
 }

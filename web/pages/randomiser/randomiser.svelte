@@ -19,7 +19,10 @@ var session:RandomisationSession=$state({
 });
 
 /** the currently showing items */
-var items:RealBookmarkItem[]=[];
+var items:RealBookmarkItem[]=$state([]);
+
+/** if on, opening tabs will focus the 1st tab opened */
+var autoFocusFirst:boolean=$state(true);
 
 // on page load, try to load the session indicated by url args. then, do initial generation
 // based on the position.
@@ -60,6 +63,40 @@ function generateItems():void
 
     items=session.items.slice(session.position,session.position+generateAmount);
 }
+
+/** open all the current items */
+function openItems():void
+{
+    for (let itemI=0;itemI<items.length;itemI++)
+    {
+        const item:RealBookmarkItem=items[itemI];
+        var active:boolean=false;
+
+        if (autoFocusFirst && itemI==0)
+        {
+            active=true;
+        }
+
+        chrome.tabs.create({
+            url:item.url,
+            active,
+        });
+    }
+}
+
+/** advance the current position in the session. modifies the session, and generates new items */
+function advancePosition():void
+{
+    session.position+=generateAmount;
+    generateItems();
+}
+
+/** clicked on main button. do action based on the current mode */
+function mainButtonClick(e:MouseEvent):void
+{
+    openItems();
+    advancePosition();
+}
 </script>
 
 <style lang="sass">
@@ -84,25 +121,19 @@ function generateItems():void
     </div>
 
     <div class="buttons">
-        <h2><a href="">Open</a></h2>
+        <h2><a href="" onclick={mainButtonClick}>Open</a></h2>
         <p><a href="">skip</a></p>
     </div>
 
     <div class="items">
         <ul>
-            <li class="item">
-                <span>1.</span>
-                <span class="icon"></span>
-                <a href="">item name</a>
-            </li>
-            <li class="item">
-                <div class="icon"></div>
-                <a href="">item name</a>
-            </li>
-            <li class="item">
-                <div class="icon"></div>
-                <a href="">item name</a>
-            </li>
+            {#each items as item (item.id)}
+                <li class="item">
+                    <span>1.</span>
+                    <span class="icon"></span>
+                    <a href={item.url}>{item.title}</a>
+                </li>
+            {/each}
         </ul>
     </div>
 </main>
