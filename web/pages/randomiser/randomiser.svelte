@@ -1,7 +1,7 @@
 <script lang="ts">
 import {onMount} from "svelte";
 
-import {getSession, getSessions} from "@/lib/storage";
+import {getSession, getSessions, updateSession} from "@/lib/storage";
 import {randomiserUrlArgs} from "@/lib/url-query";
 import {createSessionTitle} from "@/lib/session";
 
@@ -85,15 +85,26 @@ function openItems():void
 }
 
 /** advance the current position in the session. modifies the session, and generates new items */
-function advancePosition():void
+async function advancePosition():Promise<void>
 {
     session.position+=generateAmount;
+
+    const updatedSession:RandomisationSession|undefined=await updateSession(session.id,session.position);
+
+    if (!updatedSession)
+    {
+        console.error("failed to update session");
+        return;
+    }
+
+    session=updatedSession;
     generateItems();
 }
 
 /** clicked on main button. do action based on the current mode */
 function mainButtonClick(e:MouseEvent):void
 {
+    e.preventDefault();
     openItems();
     advancePosition();
 }
@@ -116,7 +127,7 @@ function mainButtonClick(e:MouseEvent):void
     </div>
 
     <div class="progress">
-        <p>progress: 0 / 1000</p>
+        <p>progress: {session.position} / {session.items.length}</p>
         <p>10 items opened</p>
     </div>
 
@@ -127,9 +138,9 @@ function mainButtonClick(e:MouseEvent):void
 
     <div class="items">
         <ul>
-            {#each items as item (item.id)}
+            {#each items as item,itemI (item.id)}
                 <li class="item">
-                    <span>1.</span>
+                    <span>{session.position+itemI+1}.</span>
                     <span class="icon"></span>
                     <a href={item.url}>{item.title}</a>
                 </li>

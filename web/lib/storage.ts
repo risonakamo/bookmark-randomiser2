@@ -34,8 +34,8 @@ export async function getSession(id:string):Promise<RandomisationSession|undefin
     });
 }
 
-/** update a session's position */
-export async function updateSession(id:string,position:number):Promise<void>
+/** update a session's position, and other fields automatically. returns the updated session */
+export async function updateSession(id:string,position:number):Promise<RandomisationSession|undefined>
 {
     const gotStorage:Storage=await chrome.storage.local.get<Storage>("sessions");
     var sessions:RandomisationSession[]=gotStorage.sessions || [];
@@ -54,4 +54,6 @@ export async function updateSession(id:string,position:number):Promise<void>
     foundSession.lastUpdateDate=getTimestamp();
 
     chrome.storage.local.set(gotStorage);
+
+    return foundSession;
 }
