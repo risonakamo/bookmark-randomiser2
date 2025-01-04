@@ -4,6 +4,7 @@ import {onMount} from "svelte";
 import {getSession, getSessions, updateSession} from "@/lib/storage";
 import {randomiserUrlArgs} from "@/lib/url-query";
 import {createSessionTitle} from "@/lib/session";
+import {getFaviconUrl} from "@/lib/bookmark";
 
 /** possible button mode states */
 type ButtonMode="open"|"generate";
@@ -199,9 +200,12 @@ function h_skipButton(e:MouseEvent):void
     <div class="items">
         <ul>
             {#each items as item,itemI (item.id)}
+                {@const iconUrl:string=getFaviconUrl(item.url)}
                 <li class="item">
                     <span>{session.position+itemI+1}.</span>
-                    <span class="icon"></span>
+                    <span class="icon">
+                        <img src={iconUrl} alt="missing"/>
+                    </span>
                     <a href={item.url}>{item.title}</a>
                 </li>
             {/each}

@@ -6,13 +6,14 @@
 - [x] selector page links to randomiser page using url query
 - [x] design out page randomisation position logic
 - [x] get components functional
-- [ ] add check boxes for the various options
-    - [ ] focus 1st tab on open
-    - [ ] auto generate next items or not
+- [x] add check boxes for the various options
+    - [x] focus 1st tab on open
+    - [x] auto generate next items or not
         - it seems like open and generate actually works really well, maybe dont need this? would make it complicated as adds the concept of "mode"
         - it would be useful as sometimes only want to open certain things
-- [ ] item icons
+- [x] item icons
 - [ ] count of items opened in this session
+- [ ] figure out what happens when complete the session
 
 # general
 - [ ] back buttons on all pages to go to select page

@@ -9,7 +9,8 @@
 
     "permissions":[
         "bookmarks",
-        "storage"
+        "storage",
+        "favicon"
     ],
 
     "action":{

@@ -153,6 +153,14 @@ export function bookmarkPathToString(path:BookmarkPath):string
     return path.join(" / ");
 }
 
+/** get favicon url for a page url */
+export function getFaviconUrl(url:string):string
+{
+    return `chrome-extension://${chrome.runtime.id}/_favicon/?`
+        +`pageUrl=${encodeURIComponent(url)}`
+        +`&size=32`;
+}
+
 /** get bookmark item at requested path */
 async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
 {
