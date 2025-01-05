@@ -23,3 +23,6 @@
 - in session objs, it is currently storing the whole list of all bookmark item objects which is kind of needlessly expensive. later optimise so only stores the ids, and when needed can upgrade to full obj
 - session title needs to help user to find the one they are looking for. need to test to see what works
 - accessing the page is annoying if need to search through the extensions menu. is there another option? can it appear in the omnibar if type certain words? maybe try bookmarking the page
+- when duplicating a session, it reshuffles the current items in the session. But should it instead go back to the origin dirs and regrab the items? if it doesn't then duplicating a session doesn't capture new bookmarks added to the origin dir folders of that session
+    - but if it grabs new items then there is no way to NOT include new items... but this is probably not normal
+    - so logically, it only makes sense to always grab new items

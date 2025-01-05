@@ -40,6 +40,7 @@
 - [x] indicate session is complete
     - [x] disable opening session
 - [ ] session duplicate/delete button
+    - duplicate should always re-grab items in the origin dirs instead of simple shuffle of current items
 
 # session create
 - [x] session create page, which is basically bookmark tree navigator
