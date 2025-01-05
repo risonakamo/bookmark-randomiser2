@@ -48,6 +48,12 @@ var buttonText:string=$derived.by(()=>{
     return "Generate";
 });
 
+/** session is done */
+var sessionComplete:boolean=$derived(session.position>=session.items.length);
+
+/** same as as session position, but caps at the session total size */
+var cleanSessionPosition=$derived(Math.min(session.position,session.items.length));
+
 // on page load, try to load the session indicated by url args. then, do initial generation
 // based on the position.
 onMount(async ()=>{
@@ -112,7 +118,16 @@ function openItems():void
 /** advance the current position in the session. modifies the session, and generates new items */
 async function advancePosition():Promise<void>
 {
+    // do nothing if already at the end
+    if (session.position>=session.items.length)
+    {
+        return;
+    }
+
     session.position+=generateAmount;
+
+    // ensuring adding to the position caps at the session max size
+    session.position=Math.min(session.position,session.items.length);
 
     const updatedSession:RandomisationSession|undefined=await updateSession(session.id,session.position);
 
@@ -181,38 +196,44 @@ function h_skipButton(e:MouseEvent):void
     </div>
 
     <div class="progress">
-        <p>progress: {session.position} / {session.items.length}</p>
+        <p>progress: {cleanSessionPosition} / {session.items.length}</p>
         <p>items generated: {totalGenerated}</p>
     </div>
 
-    <div class="buttons">
-        <h2><a href="" onclick={h_mainButton}>{buttonText}</a></h2>
-        <h3><a href="" onclick={h_skipButton}>skip</a></h3>
+    <div class="gen-zone">
+        {#if !sessionComplete}
+            <div class="buttons">
+                <h2><a href="" onclick={h_mainButton}>{buttonText}</a></h2>
+                <h3><a href="" onclick={h_skipButton}>skip</a></h3>
 
-        <div class="settings">
-            <span>
-                <input type="checkbox" bind:checked={autoFocusFirst}>
-                <span>Focus 1st Open Tab</span>
-            </span>
-            <span>
-                <input type="checkbox" bind:checked={autoGenNextItems}>
-                <span>Auto Generate Next Items</span>
-            </span>
-        </div>
-    </div>
-
-    <div class="items">
-        <ul>
-            {#each items as item,itemI (item.id)}
-                {@const iconUrl:string=getFaviconUrl(item.url)}
-                <li class="item">
-                    <span>{session.position+itemI+1}.</span>
-                    <span class="icon">
-                        <img src={iconUrl} alt="missing"/>
+                <div class="settings">
+                    <span>
+                        <input type="checkbox" bind:checked={autoFocusFirst}>
+                        <span>Focus 1st Open Tab</span>
                     </span>
-                    <a href={item.url}>{item.title}</a>
-                </li>
-            {/each}
-        </ul>
+                    <span>
+                        <input type="checkbox" bind:checked={autoGenNextItems}>
+                        <span>Auto Generate Next Items</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="items">
+                <ul>
+                    {#each items as item,itemI (item.id)}
+                        {@const iconUrl:string=getFaviconUrl(item.url)}
+                        <li class="item">
+                            <span>{session.position+itemI+1}.</span>
+                            <span class="icon">
+                                <img src={iconUrl} alt="missing"/>
+                            </span>
+                            <a href={item.url}>{item.title}</a>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
+        {:else}
+            <p>Session Complete</p>
+        {/if}
     </div>
 </main>

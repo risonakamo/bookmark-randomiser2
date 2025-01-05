@@ -13,7 +13,7 @@
         - it would be useful as sometimes only want to open certain things
 - [x] item icons
 - [x] count of items opened in this session
-- [ ] figure out what happens when complete the session
+- [x] figure out what happens when complete the session
 
 # general
 - [ ] back buttons on all pages to go to select page
@@ -37,6 +37,8 @@
 - [x] figure out what to do for the title
 - [x] order by last updated
 - [x] text when there is no sessions
+- [ ] indicate session is complete
+    - [ ] disable opening session
 - [ ] session duplicate/delete button
 
 # session create
