@@ -1,7 +1,7 @@
 <script lang="ts">
 import {onMount} from "svelte";
 
-import {getSessions} from "@/lib/storage";
+import {deleteSession, getSessions} from "@/lib/storage";
 import {createSessionTitle, sortSessions} from "@/lib/session";
 import {createRandomiserUrl} from "@/lib/url-query";
 
@@ -19,6 +19,21 @@ function h_resetButton():void
 {
     chrome.storage.local.clear();
     window.location.reload();
+}
+
+/** delete button. trigger delete of session, and refresh the session list with delete result */
+function h_delete(session:RandomisationSession)
+{
+    return async (e:MouseEvent):Promise<void>=>{
+        e.preventDefault();
+        sessions=sortSessions(await deleteSession(session.id));
+    };
+}
+
+/** duplicate button. duplicate a session and update the session list */
+function h_duplicate(session:RandomisationSession)
+{
+
 }
 </script>
 
@@ -59,7 +74,7 @@ function h_resetButton():void
                         {/each}
                     </ul>
                     <div class="controls">
-                        <a href="">delete</a>
+                        <a href="" onclick={h_delete(session)}>delete</a>
                         <a href="">duplicate</a>
                     </div>
                 </div>

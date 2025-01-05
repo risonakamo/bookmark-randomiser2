@@ -4,8 +4,8 @@ import _ from "lodash";
 
 import {getTimestamp} from "@/lib/util";
 
-/** add a session to the storage */
-export async function addSession(session:RandomisationSession):Promise<void>
+/** add a session to the storage. returns the new list of sessions */
+export async function addSession(session:RandomisationSession):Promise<RandomisationSession[]>
 {
     const gotStorage:Storage=await chrome.storage.local.get<Storage>("sessions");
     var sessions:RandomisationSession[]=gotStorage.sessions || [];
@@ -15,6 +15,8 @@ export async function addSession(session:RandomisationSession):Promise<void>
     gotStorage.sessions=sessions;
 
     chrome.storage.local.set(gotStorage);
+
+    return sessions;
 }
 
 /** get the current sessions */
@@ -40,9 +42,12 @@ export async function updateSession(id:string,position:number):Promise<Randomisa
     const gotStorage:Storage=await chrome.storage.local.get<Storage>("sessions");
     var sessions:RandomisationSession[]=gotStorage.sessions || [];
 
-    const foundSession:RandomisationSession|undefined=_.find(sessions,(session:RandomisationSession):boolean=>{
-        return session.id==id;
-    });
+    const foundSession:RandomisationSession|undefined=_.find(
+        sessions,
+        (session:RandomisationSession):boolean=>{
+            return session.id==id;
+        }
+    );
 
     if (!foundSession)
     {
@@ -56,4 +61,25 @@ export async function updateSession(id:string,position:number):Promise<Randomisa
     chrome.storage.local.set(gotStorage);
 
     return foundSession;
+}
+
+/** delete from storage a target sessino. return the updated list of sessions */
+export async function deleteSession(id:string):Promise<RandomisationSession[]>
+{
+    const gotStorage:Storage=await chrome.storage.local.get<Storage>("sessions");
+    var sessions:RandomisationSession[]=gotStorage.sessions || [];
+
+    _.remove(sessions,(session:RandomisationSession):boolean=>{
+        return session.id==id;
+    });
+
+    chrome.storage.local.set(gotStorage);
+
+    return sessions;
+}
+
+/** duplicate a target session id, making a new one with position reset and items reshuffled */
+export async function duplicateSession(id:string):Promise<RandomisationSession[]>
+{
+
 }
