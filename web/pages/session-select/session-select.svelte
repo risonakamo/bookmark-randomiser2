@@ -35,9 +35,19 @@ function h_resetButton():void
         {#if sessions.length>0}
             {#each sessions as session (session.id)}
                 {@const randomiserUrl:string=createRandomiserUrl(session.id)}
+                {@const sessionComplete:boolean=session.position>=session.items.length}
+
                 <div class="session">
                     <h2>
-                        <a href={randomiserUrl}>{createSessionTitle(session)}</a>
+                        {#snippet inner()}
+                            {createSessionTitle(session)}
+                        {/snippet}
+
+                        {#if !sessionComplete}
+                            <a href={randomiserUrl}>{@render inner()}</a>
+                        {:else}
+                            <s>{@render inner()}</s>
+                        {/if}
                     </h2>
                     <p>created: {session.createdDate}</p>
                     <p>updated: {session.lastUpdateDate}</p>

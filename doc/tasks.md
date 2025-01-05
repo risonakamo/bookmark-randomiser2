@@ -37,8 +37,8 @@
 - [x] figure out what to do for the title
 - [x] order by last updated
 - [x] text when there is no sessions
-- [ ] indicate session is complete
-    - [ ] disable opening session
+- [x] indicate session is complete
+    - [x] disable opening session
 - [ ] session duplicate/delete button
 
 # session create
