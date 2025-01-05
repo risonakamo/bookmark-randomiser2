@@ -12,7 +12,7 @@
         - it seems like open and generate actually works really well, maybe dont need this? would make it complicated as adds the concept of "mode"
         - it would be useful as sometimes only want to open certain things
 - [x] item icons
-- [ ] count of items opened in this session
+- [x] count of items opened in this session
 - [ ] figure out what happens when complete the session
 
 # general
@@ -37,7 +37,7 @@
 - [x] figure out what to do for the title
 - [x] order by last updated
 - [x] text when there is no sessions
-- move on to randomisation page
+- [ ] session duplicate/delete button
 
 # session create
 - [x] session create page, which is basically bookmark tree navigator

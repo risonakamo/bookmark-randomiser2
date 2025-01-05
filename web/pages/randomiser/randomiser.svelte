@@ -35,6 +35,9 @@ var autoGenNextItems:boolean=$state(true);
 /** the current button mode */
 var buttonMode:ButtonMode=$state("open");
 
+/** total items generated in the current page tab */
+var totalGenerated:number=$state(0);
+
 /** text of the main button */
 var buttonText:string=$derived.by(()=>{
     if (buttonMode=="open")
@@ -83,6 +86,7 @@ function generateItems():void
     }
 
     items=session.items.slice(session.position,session.position+generateAmount);
+    totalGenerated+=generateAmount;
 }
 
 /** open all the current items */
@@ -178,7 +182,7 @@ function h_skipButton(e:MouseEvent):void
 
     <div class="progress">
         <p>progress: {session.position} / {session.items.length}</p>
-        <p>10 items opened</p>
+        <p>items generated: {totalGenerated}</p>
     </div>
 
     <div class="buttons">
