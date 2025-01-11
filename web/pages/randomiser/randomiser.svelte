@@ -133,8 +133,6 @@ async function advancePosition():Promise<void>
         return;
     }
 
-    newGenerateAmount();
-
     session.position+=lastGenerateAmount;
 
     // ensuring adding to the position caps at the session max size
@@ -152,6 +150,8 @@ async function advancePosition():Promise<void>
     }
 
     session=updatedSession;
+
+    newGenerateAmount();
     generateItems(lastGenerateAmount);
 }
 
