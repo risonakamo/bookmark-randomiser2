@@ -54,14 +54,10 @@ function h_duplicate(session:RandomisationSession)
 
                 <div class="session">
                     <h2>
-                        {#snippet inner()}
-                            {createSessionTitle(session)}
-                        {/snippet}
-
                         {#if !sessionComplete}
-                            <a href={randomiserUrl}>{@render inner()}</a>
+                            <a href={randomiserUrl}>{session.title}</a>
                         {:else}
-                            <s>{@render inner()}</s>
+                            <s>{session.title}</s>
                         {/if}
                     </h2>
                     <p>created: {session.createdDate}</p>

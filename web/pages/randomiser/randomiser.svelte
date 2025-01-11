@@ -19,6 +19,7 @@ const generateAmountMax:number=15;
 /** the current session */
 var session:RandomisationSession=$state({
     id:"",
+    title:"",
     items:[],
     position:0,
     createdDate:"",
@@ -205,7 +206,7 @@ function h_skipButton(e:MouseEvent):void
 
 <main>
     <div class="info">
-        <h1>{createSessionTitle(session)}</h1>
+        <h1>{session.title}</h1>
         <p>created: {session.createdDate}</p>
         <p>updated: {session.lastUpdateDate}</p>
         <ul>

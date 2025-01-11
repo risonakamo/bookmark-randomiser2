@@ -4,6 +4,7 @@
 interface RandomisationSession
 {
     id:string
+    title:string
 
     items:RealBookmarkItem[]
 

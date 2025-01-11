@@ -1,7 +1,7 @@
 <script lang="ts">
 import _ from "lodash";
 
-import {createSession} from "@/lib/session";
+import {createSession, createSessionTitle} from "@/lib/session";
 import {addSession} from "@/lib/storage";
 import {getChildItemsMultiple} from "@/lib/bookmark";
 
@@ -10,6 +10,9 @@ var {
 }:{
     selectedItems:BookmarkItem[]
 }=$props();
+
+/** value of the title text input box */
+var titleText:string=$state("");
 
 /** total count of inner bookmark items from selected bookmark folders */
 var itemCount:number=$derived.by(()=>{
@@ -50,7 +53,19 @@ async function h_submit(e:MouseEvent):Promise<void>
 
     items=_.shuffle(items);
 
-    await addSession(createSession(items,$state.snapshot(selectedItems)));
+    // come up with title to use. if user did not enter anything, use default
+    // made from the selected items.
+    var title:string=titleText.trim();
+    if (title.length==0)
+    {
+        title=createSessionTitle(selectedItems);
+    }
+
+    await addSession(createSession(
+        items,
+        $state.snapshot(selectedItems),
+        title,
+    ));
 
     window.location.href="/build/session-select.html";
 }
@@ -80,6 +95,11 @@ async function h_submit(e:MouseEvent):Promise<void>
         <div class="totals">
             <p class="text">Total</p>
             <p class="count">{itemCount}</p>
+        </div>
+
+        <div class="title-entry">
+            <p>title</p>
+            <input type="text" bind:value={titleText}/>
         </div>
 
         <div class="submit-button">

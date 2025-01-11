@@ -8,10 +8,12 @@ import {getTimestamp} from "@/lib/util";
 export function createSession(
     items:RealBookmarkItem[],
     dirs:BookmarkItem[],
+    title:string,
 ):RandomisationSession
 {
     return {
         id:window.crypto.randomUUID().slice(0,15),
+        title,
 
         items,
 
@@ -27,9 +29,9 @@ export function createSession(
 /** return a string title for a session.
  *  todo: maybe improve this so it is more identifiable. need to test if the current
  *  strategy works or not */
-export function createSessionTitle(session:RandomisationSession):string
+export function createSessionTitle(originDirs:BookmarkItem[]):string
 {
-    return _.map(session.originDirs,(originDir:BookmarkItem):string=>{
+    return _.map(originDirs,(originDir:BookmarkItem):string=>{
         return originDir.title;
     }).join(", ");
 }
