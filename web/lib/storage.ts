@@ -79,7 +79,7 @@ export async function deleteSession(id:string):Promise<RandomisationSession[]>
 }
 
 /** duplicate a target session id, making a new one with position reset and items reshuffled */
-export async function duplicateSession(id:string):Promise<RandomisationSession[]>
-{
+// export async function duplicateSession(id:string):Promise<RandomisationSession[]>
+// {
 
-}
+// }

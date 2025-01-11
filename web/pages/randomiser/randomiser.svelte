@@ -1,5 +1,6 @@
 <script lang="ts">
 import {onMount} from "svelte";
+import _ from "lodash";
 
 import {getSession, getSessions, updateSession} from "@/lib/storage";
 import {randomiserUrlArgs} from "@/lib/url-query";
@@ -9,8 +10,11 @@ import {getFaviconUrl} from "@/lib/bookmark";
 /** possible button mode states */
 type ButtonMode="open"|"generate";
 
-/** items per generation */
-const generateAmount:number=10;
+/** when generate, randomly picks amount of items to generate. this is the smallest amount
+ *  of items that can be generated */
+const generateAmountMin:number=8;
+/** largest amount of items that can be generated */
+const generateAmountMax:number=15;
 
 /** the current session */
 var session:RandomisationSession=$state({
@@ -37,6 +41,9 @@ var buttonMode:ButtonMode=$state("open");
 
 /** total items generated in the current page tab */
 var totalGenerated:number=$state(0);
+
+/** last picked generate amount */
+var lastGenerateAmount:number=0;
 
 /** text of the main button */
 var buttonText:string=$derived.by(()=>{
@@ -76,14 +83,15 @@ onMount(async ()=>{
     }
 
     session=foundSession;
-    generateItems();
+    newGenerateAmount();
+    generateItems(lastGenerateAmount);
 
     console.log("loaded",session);
     console.log("items",items);
 });
 
 /** load the current items given the current position */
-function generateItems():void
+function generateItems(generateAmount:number):void
 {
     if (session.position>=session.items.length)
     {
@@ -115,7 +123,8 @@ function openItems():void
     }
 }
 
-/** advance the current position in the session. modifies the session, and generates new items */
+/** pick a new random generate amount. advance the session by that amount, then generate items
+ *  also using that amount */
 async function advancePosition():Promise<void>
 {
     // do nothing if already at the end
@@ -124,12 +133,17 @@ async function advancePosition():Promise<void>
         return;
     }
 
-    session.position+=generateAmount;
+    newGenerateAmount();
+
+    session.position+=lastGenerateAmount;
 
     // ensuring adding to the position caps at the session max size
     session.position=Math.min(session.position,session.items.length);
 
-    const updatedSession:RandomisationSession|undefined=await updateSession(session.id,session.position);
+    const updatedSession:RandomisationSession|undefined=await updateSession(
+        session.id,
+        session.position
+    );
 
     if (!updatedSession)
     {
@@ -138,7 +152,13 @@ async function advancePosition():Promise<void>
     }
 
     session=updatedSession;
-    generateItems();
+    generateItems(lastGenerateAmount);
+}
+
+/** set the last generate amount */
+function newGenerateAmount():void
+{
+    lastGenerateAmount=_.random(generateAmountMin,generateAmountMax);
 }
 
 /** clicked on main button. do action based on the current mode.
