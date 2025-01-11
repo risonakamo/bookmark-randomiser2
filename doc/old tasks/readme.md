@@ -1,0 +1,1 @@
+This folder contains old planning docs ideas of which have been implemented/transferred into issues and don't need to be read anymore.

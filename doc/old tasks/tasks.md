@@ -1,3 +1,5 @@
+**items transferred to issues board**
+
 # randomisation page
 - [x] setup page
 - [x] design layout
@@ -16,8 +18,8 @@
 - [x] figure out what happens when complete the session
 
 # general
-- [ ] back buttons on all pages to go to select page
-- [ ] target date displays and change to "relative time" dates (ex: 10 days ago)
+- [x] back buttons on all pages to go to select page
+- [x] target date displays and change to "relative time" dates (ex: 10 days ago)
 
 # main page
 - [x] setup main page
@@ -39,7 +41,7 @@
 - [x] text when there is no sessions
 - [x] indicate session is complete
     - [x] disable opening session
-- [ ] session duplicate/delete button
+- [x] session duplicate/delete button
     - duplicate should always re-grab items in the origin dirs instead of simple shuffle of current items
 
 # session create

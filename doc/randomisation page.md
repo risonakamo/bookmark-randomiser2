@@ -35,12 +35,12 @@ main features:
 # prototype ui requirements
 based on features, here are the components to fulfil the features
 
-- [ ] main action button
-- [ ] sub action button
-- [ ] url query session load system
-- [ ] links display
-- [ ] session information display
-- [ ] progress bar
+- [x] main action button
+- [x] sub action button
+- [x] url query session load system
+- [x] links display
+- [x] session information display
+- [x] progress bar
 
 # page randomisation logic
 - on page start, page is in generate mode with 0 items. automatically execute the generate action as if user pressed the button
