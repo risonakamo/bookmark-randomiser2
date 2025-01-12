@@ -76,6 +76,10 @@ function h_duplicate(session:RandomisationSession)
                     <div class="controls">
                         <a href="" onclick={h_delete(session)}>delete</a>
                         <a href="" onclick={h_duplicate(session)}>duplicate</a>
+                        <div>
+                            <label>New Title:</label>
+                            <input type="text"/>
+                        </div>
                     </div>
                 </div>
             {/each}
