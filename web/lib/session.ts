@@ -2,6 +2,7 @@
 
 import _ from "lodash";
 import {getTimestamp} from "@/lib/util";
+import {getChildItemsMultipleWithBookmarkItems} from "@/lib/bookmark";
 
 /** create a session. items is the actual bookmark items of the session, dirs is the
  *  bookmark folders used to choose the items */
@@ -42,4 +43,21 @@ export function sortSessions(sessions:RandomisationSession[]):RandomisationSessi
     return _.reverse(_.sortBy(sessions,(session:RandomisationSession):Date=>{
         return new Date(session.lastUpdateDate);
     }));
+}
+
+/** create a new session using a session as base. regenerates all items from the origin dirs of the
+ *  session (so the number of items in the session might not be the same) */
+export async function duplicateSession(
+    session:RandomisationSession,
+    title:string,
+):Promise<RandomisationSession>
+{
+    var items:RealBookmarkItem[]=await getChildItemsMultipleWithBookmarkItems(session.originDirs);
+    items=_.shuffle(items);
+
+    return createSession(
+        items,
+        session.originDirs,
+        title,
+    );
 }

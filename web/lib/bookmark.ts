@@ -84,6 +84,18 @@ export async function getChildItemsMultiple(ids:string[]):Promise<RealBookmarkIt
     return _.flatten(items);
 }
 
+/** variant of above function. gets the real bookmark items of all the target bookmark items */
+export async function getChildItemsMultipleWithBookmarkItems(
+    items:BookmarkItem[]
+):Promise<RealBookmarkItem[]>
+{
+    return getChildItemsMultiple(
+        _.map(items,(item:BookmarkItem):string=>{
+            return item.id;
+        })
+    );
+}
+
 /** convert bookmark id to bookmark path */
 export async function bookmarkIdToPath(id:string):Promise<BookmarkPath>
 {

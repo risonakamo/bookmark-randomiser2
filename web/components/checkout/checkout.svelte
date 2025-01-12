@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import {createSession, createSessionTitle} from "@/lib/session";
 import {addSession} from "@/lib/storage";
-import {getChildItemsMultiple} from "@/lib/bookmark";
+import {getChildItemsMultipleWithBookmarkItems} from "@/lib/bookmark";
 
 var {
     selectedItems=$bindable([])
@@ -45,11 +45,7 @@ async function h_submit(e:MouseEvent):Promise<void>
         return;
     }
 
-    var items:RealBookmarkItem[]=await getChildItemsMultiple(
-        _.map(selectedItems,(item:BookmarkItem):string=>{
-            return item.id;
-        })
-    );
+    var items:RealBookmarkItem[]=await getChildItemsMultipleWithBookmarkItems(selectedItems);
 
     items=_.shuffle(items);
 

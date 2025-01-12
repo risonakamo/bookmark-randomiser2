@@ -1,8 +1,8 @@
 <script lang="ts">
 import {onMount} from "svelte";
 
-import {deleteSession, getSessions} from "@/lib/storage";
-import {createSessionTitle, sortSessions} from "@/lib/session";
+import {addSession, deleteSession, getSessions} from "@/lib/storage";
+import {duplicateSession, sortSessions} from "@/lib/session";
 import {createRandomiserUrl} from "@/lib/url-query";
 
 /** the sessions */
@@ -24,7 +24,7 @@ function h_resetButton():void
 /** delete button. trigger delete of session, and refresh the session list with delete result */
 function h_delete(session:RandomisationSession)
 {
-    return async (e:MouseEvent):Promise<void>=>{
+    return async (e:MouseEvent)=>{
         e.preventDefault();
         sessions=sortSessions(await deleteSession(session.id));
     };
@@ -33,7 +33,11 @@ function h_delete(session:RandomisationSession)
 /** duplicate button. duplicate a session and update the session list */
 function h_duplicate(session:RandomisationSession)
 {
-
+    return async (e:MouseEvent)=>{
+        e.preventDefault();
+        const newSession:RandomisationSession=await duplicateSession(session,session.title);
+        sessions=sortSessions(await addSession(newSession));
+    };
 }
 </script>
 
@@ -71,7 +75,7 @@ function h_duplicate(session:RandomisationSession)
                     </ul>
                     <div class="controls">
                         <a href="" onclick={h_delete(session)}>delete</a>
-                        <a href="">duplicate</a>
+                        <a href="" onclick={h_duplicate(session)}>duplicate</a>
                     </div>
                 </div>
             {/each}
