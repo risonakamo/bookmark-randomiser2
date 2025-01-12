@@ -29,7 +29,7 @@ function h_delete(e:MouseEvent):void
 function h_duplicate(e:MouseEvent):void
 {
     e.preventDefault();
-    onduplicate(session);
+    onduplicate($state.snapshot(session));
 }
 </script>
 
