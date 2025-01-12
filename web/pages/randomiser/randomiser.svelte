@@ -205,6 +205,7 @@ function h_skipButton(e:MouseEvent):void
 </style>
 
 <main>
+    <a href="./session-select.html">Back to Main Page</a>
     <div class="info">
         <h1>{session.title}</h1>
         <p>created: {session.createdDate}</p>

@@ -49,5 +49,6 @@ async function refreshItems():Promise<void>
     </div>
     <div class="checkout">
         <Checkout bind:selectedItems={selectedItems}/>
+        <a href="./session-select.html">Back to Main Page</a>
     </div>
 </main>
