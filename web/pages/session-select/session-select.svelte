@@ -28,9 +28,9 @@ async function h_delete(session:RandomisationSession)
 }
 
 /** duplicate button. duplicate a session and update the session list */
-async function h_duplicate(session:RandomisationSession)
+async function h_duplicate(session:RandomisationSession,title:string)
 {
-    const newSession:RandomisationSession=await duplicateSession(session,session.title);
+    const newSession:RandomisationSession=await duplicateSession(session,title);
     sessions=sortSessions(await addSession(newSession));
 }
 </script>
