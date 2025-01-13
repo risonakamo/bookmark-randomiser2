@@ -4,6 +4,7 @@ import _ from "lodash";
 import {createSession, createSessionTitle} from "@/lib/session";
 import {addSession} from "@/lib/storage";
 import {getChildItemsMultipleWithBookmarkItems} from "@/lib/bookmark";
+import {createRandomiserUrl} from "@/lib/url-query";
 
 var {
     selectedItems=$bindable([])
@@ -57,13 +58,15 @@ async function h_submit(e:MouseEvent):Promise<void>
         title=createSessionTitle(selectedItems);
     }
 
-    await addSession(createSession(
+    const newSession:RandomisationSession=createSession(
         items,
         $state.snapshot(selectedItems),
         title,
-    ));
+    );
 
-    window.location.href="/build/session-select.html";
+    await addSession(newSession);
+
+    window.location.href=createRandomiserUrl(newSession.id);
 }
 </script>
 
