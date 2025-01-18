@@ -65,6 +65,9 @@ var cleanSessionPosition=$derived(Math.min(session.position,session.items.length
 /** amount the session position has changed */
 var sessionPositionChange:number=$derived(session.position-initialSessionPosition);
 
+/** if the user has opened at least 1 link by clicking. resets on regenerate */
+var openedALink:boolean=$state(false);
+
 // on page load, try to load the session indicated by url args. then, do initial generation
 // based on the position.
 onMount(async ()=>{
@@ -158,6 +161,7 @@ async function advancePosition():Promise<void>
 
     newGenerateAmount();
     generateItems(lastGenerateAmount);
+    openedALink=false;
 }
 
 /** set the last generate amount */
@@ -209,6 +213,7 @@ function h_clickLink(e:MouseEvent)
     e.preventDefault();
 
     const focus:boolean=e.ctrlKey;
+    openedALink=true;
 
     chrome.tabs.create({
         url:(e.currentTarget as HTMLAnchorElement).href,
@@ -242,8 +247,12 @@ function h_clickLink(e:MouseEvent)
     <div class="gen-zone">
         {#if !sessionComplete}
             <div class="buttons">
-                <h2><a href="" onclick={h_mainButton}>{buttonText}</a></h2>
-                <h3><a href="" onclick={h_skipButton}>skip</a></h3>
+                <h2 class:size-reverse={openedALink}><a href="" onclick={h_mainButton}>
+                    {buttonText}
+                </a></h2>
+                <h3 class:size-reverse={openedALink}><a href="" onclick={h_skipButton}>
+                    skip
+                </a></h3>
 
                 <div class="settings">
                     <span>
