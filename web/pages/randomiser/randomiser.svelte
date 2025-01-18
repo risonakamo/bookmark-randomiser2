@@ -27,6 +27,9 @@ var session:RandomisationSession=$state({
     originDirs:[],
 });
 
+/** position of the session on first load */
+var initialSessionPosition:number=$state(0);
+
 /** the currently showing items */
 var items:RealBookmarkItem[]=$state([]);
 
@@ -39,9 +42,6 @@ var autoGenNextItems:boolean=$state(true);
 
 /** the current button mode */
 var buttonMode:ButtonMode=$state("open");
-
-/** total items generated in the current page tab */
-var totalGenerated:number=$state(0);
 
 /** last picked generate amount */
 var lastGenerateAmount:number=0;
@@ -61,6 +61,9 @@ var sessionComplete:boolean=$derived(session.position>=session.items.length);
 
 /** same as as session position, but caps at the session total size */
 var cleanSessionPosition=$derived(Math.min(session.position,session.items.length));
+
+/** amount the session position has changed */
+var sessionPositionChange:number=$derived(session.position-initialSessionPosition);
 
 // on page load, try to load the session indicated by url args. then, do initial generation
 // based on the position.
@@ -84,6 +87,7 @@ onMount(async ()=>{
     }
 
     session=foundSession;
+    initialSessionPosition=session.position;
     newGenerateAmount();
     generateItems(lastGenerateAmount);
 
@@ -101,7 +105,6 @@ function generateItems(generateAmount:number):void
     }
 
     items=session.items.slice(session.position,session.position+generateAmount);
-    totalGenerated+=generateAmount;
 }
 
 /** open all the current items */
@@ -219,7 +222,7 @@ function h_skipButton(e:MouseEvent):void
 
     <div class="progress">
         <p>progress: {cleanSessionPosition} / {session.items.length}</p>
-        <p>items generated: {totalGenerated}</p>
+        <p>items generated: {sessionPositionChange}</p>
     </div>
 
     <div class="gen-zone">
