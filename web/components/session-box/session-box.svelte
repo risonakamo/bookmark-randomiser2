@@ -92,6 +92,7 @@ function h_duplicate(e:MouseEvent):void
             <s>{session.title}</s>
         {/if}
     </h2>
+    <h3>{session.id}</h3>
     <p>created: {session.createdDate}</p>
     <p>updated: {session.lastUpdateDate}</p>
     <p>progress: {session.position}/{session.items.length}</p>

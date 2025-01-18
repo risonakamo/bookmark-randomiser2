@@ -202,6 +202,19 @@ function h_skipButton(e:MouseEvent):void
     advancePosition();
     buttonMode="open";
 }
+
+/** clicked on link. open link in new tab */
+function h_clickLink(e:MouseEvent)
+{
+    e.preventDefault();
+
+    const focus:boolean=e.ctrlKey;
+
+    chrome.tabs.create({
+        url:(e.currentTarget as HTMLAnchorElement).href,
+        active:focus
+    });
+}
 </script>
 
 <style lang="sass">
@@ -253,7 +266,7 @@ function h_skipButton(e:MouseEvent):void
                             <span class="icon">
                                 <img src={iconUrl} alt="missing"/>
                             </span>
-                            <a href={item.url}>{item.title}</a>
+                            <a href={item.url} onclick={h_clickLink}>{item.title}</a>
                         </li>
                     {/each}
                 </ul>
