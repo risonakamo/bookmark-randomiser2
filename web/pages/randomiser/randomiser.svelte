@@ -90,6 +90,7 @@ onMount(async ()=>{
     initialSessionPosition=session.position;
     newGenerateAmount();
     generateItems(lastGenerateAmount);
+    document.title=`Bookmarks Randomiser: ${session.title}`;
 
     console.log("loaded",session);
     console.log("items",items);
