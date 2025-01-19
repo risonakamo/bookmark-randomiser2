@@ -1,6 +1,6 @@
 {
   "name": "bookmark-randomiser2",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "scripts": {
     "b": "vite build -w false",
     "w": "vite build -w true",
